@@ -1,13 +1,21 @@
-import assert from "@dashkite/assert"
-import {print, test, success} from "amen"
+import { test, success } from "@dashkite/amen"
+import print from "@dashkite/amen-console"
 
-import * as x from "../src"
+import * as k from "@dashkite/katana"
+import * as m from "@dashkite/mimic"
+import browse from "@dashkite/genie-presets/browser"
 
-do ->
+do browse ({browser, port}) ->
 
-  print await test "", [
+  print await test "Tests", [
 
-    test "", ->
+    await do m.launch browser, [
+      m.page
+      m.goto "http://localhost:#{port}/"
+      m.waitFor -> window.__test?
+      m.evaluate -> window.__test
+      k.get
+    ]
 
   ]
 
