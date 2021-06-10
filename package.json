@@ -34,5 +34,10 @@
     "@dashkite/katana": "^0.4.8",
     "@dashkite/mimic": "^0.2.3",
     "coffeescript": "^2.5.1"
+  },
+  "dependencies": {
+    "@codemirror/basic-setup": "^0.18.2",
+    "@codemirror/legacy-modes": "^0.18.0",
+    "@codemirror/stream-parser": "^0.18.2"
   }
 }
