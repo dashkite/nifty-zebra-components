@@ -51,3 +51,6 @@ presets:
           glob:
             - src/**/*.styl
             - '!src/index.styl'
+  sprites:
+    glob: "src/media/-sprites/**/*.svg"
+    target: "src/media/images/sprites.svg"

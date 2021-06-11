@@ -1,3 +1,20 @@
-h1 Authoring Environment
+- counter = 0
+mixin list(items)
+  ul
+    each item in items
+      if Array.isArray(item)
+        li( tabindex = 0)
+          input(type = "checkbox" id = `tree-toggle-${counter}`)
+          label( for=`tree-toggle-${counter++}` )= item[0]
+          +list(item[1])
+      else
+        li( tabindex = 0 ): span= item
 
-div.editor
+header
+  h1 Project #{project.title}
+
+.main
+  div.navigator
+    +list(project.drive)
+
+  div.editor

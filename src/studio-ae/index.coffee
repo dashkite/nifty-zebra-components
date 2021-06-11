@@ -7,31 +7,16 @@ _ = { _F..., _O..., _M... }
 import * as k from "@dashkite/katana"
 import * as c from "@dashkite/carbon"
 
-import { Project } from "./resources"
 import html from "./html"
 import css from "./css"
 
 import {
-  EditorState
-  EditorView
-  basicSetup
-} from "@codemirror/basic-setup"
+  Project
+} from "./resources"
 
-# import { javascript } from "@codemirror/lang-javascript"
-import { StreamLanguage } from "@codemirror/stream-parser"
-import { coffeeScript } from "@codemirror/legacy-modes/mode/coffeescript"
-
-editor = (handle) ->
-  console.log handle.root.querySelector ".editor"
-  view = new EditorView
-    root: handle.shadow
-    state: EditorState.create
-      extensions: [
-        basicSetup
-        StreamLanguage.define coffeeScript
-      ]
-    parent: handle.root.querySelector ".editor"
-
+import {
+  editor
+} from "./helpers"
 
 class extends c.Handle
 
@@ -44,7 +29,7 @@ class extends c.Handle
       c.activate [
         c.description
         k.push Project.get
-        k.push _.merge
+        k.mpoke (project, description) -> { project, description }
         c.render html
         k.read "handle"
         k.peek editor
