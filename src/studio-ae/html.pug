@@ -10,11 +10,24 @@ mixin list(items)
       else
         li( tabindex = 0 ): span= item
 
-header
-  h1 Project #{project.title}
-
-.main
-  div.navigator
+div.navigator
+  .directory
     +list(project.drive)
 
-  div.editor
+  .actions
+    input(type = "checkbox" id = "actions-toggle" )
+    label( for = "actions-toggle" )
+      svg: use( href= "/media/images/sprites.svg#file-actions" )
+      span Actions
+    .drawer
+      ul
+        li
+          button
+            svg: use( href= "/media/images/sprites.svg#new-file" )
+            span New File
+        li
+          button
+            svg: use( href= "/media/images/sprites.svg#new-folder" )
+            span New Folder
+
+div.editor
