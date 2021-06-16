@@ -22,7 +22,7 @@ row-gap(size)
     background-color var(--background)
 
     .directory
-    
+
       ul
         list-style-type none
         padding 0
@@ -33,62 +33,32 @@ row-gap(size)
           margin 0
           border-radius 0.25rem
 
-        ul
-          overflow hidden
-          transition all 0.2s ease-in-out
+          &:focus
+            background var(--dark-background)
+            outline none
+            color white
+            :before
+              filter brightness(0) invert(1)
+            
+          ul
+            margin-left 1.5rem
 
-          li
-            margin-left 2rem
-            user-select none
-            &:focus
-              background var(--dark-background)
-              outline none
-              color white
-              :before
-                filter brightness(0) invert(1)
+          & > vellum-drawer
+            [slot $= "-label"]
+              display inline-flex
+              align-items center
+              &:before
+                display inline-block
+                height 1.25rem
+                width 1.25rem
+                margin-right 0.5rem
 
-        span
-          &:before
-            display inline-block
-            height 1.25rem
-            width 1.25rem
-            margin-right 0.5rem
-            content url("data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pjxzdmcgdmlld0JveD0iMCAwIDMyIDMyIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjx0aXRsZS8+PGcgZGF0YS1uYW1lPSIyMC1kb2N1bWVudHMiIGlkPSJfMjAtZG9jdW1lbnRzIj48cGF0aCBkPSJNMjkuODIsMzJIMi4xOFYwaDE5VjguNjloOC42N1ptLTI2LTEuNjNIMjguMTl2LTIwSDE5LjUyVjEuNjRIMy44MVoiLz48cmVjdCBoZWlnaHQ9IjEyLjI2IiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgzLjg0IDE5LjA3KSByb3RhdGUoLTQ1KSIgd2lkdGg9IjEuNjMiIHg9IjI0LjEzIiB5PSItMS4yNCIvPjxyZWN0IGhlaWdodD0iMS42MyIgd2lkdGg9IjE3LjM0IiB4PSI3LjMzIiB5PSIxMy4wMiIvPjxyZWN0IGhlaWdodD0iMS42MyIgd2lkdGg9IjE3LjM0IiB4PSI3LjMzIiB5PSIxOC40NCIvPjxyZWN0IGhlaWdodD0iMS42MyIgd2lkdGg9IjE3LjM0IiB4PSI3LjMzIiB5PSIyMy44NiIvPjwvZz48L3N2Zz4=")
-
-        label
-          padding 0
-          margin 0
-          user-select none
-          cursor pointer
-          display inline-flex
-          &:before
-            display inline-block
-            height 1.5rem
-            width 1.5rem
-            content url("data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pjxzdmcgdmlld0JveD0iMCAwIDMyIDMyIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxkZWZzPjxzdHlsZT4uY2xzLTF7ZmlsbDojMTAxODIwO308L3N0eWxlPjwvZGVmcz48dGl0bGUvPjxnIGRhdGEtbmFtZT0iTGF5ZXIgMzgiIGlkPSJMYXllcl8zOCI+PHBhdGggY2xhc3M9ImNscy0xIiBkPSJNMjgsMjhINGEzLDMsMCwwLDEtMy0zVjdBMywzLDAsMCwxLDQsNGg4YTEsMSwwLDAsMSwuNzcuMzZMMTUuOCw4SDI4YTMsMywwLDAsMSwzLDNWMjVBMywzLDAsMCwxLDI4LDI4Wk00LDZBMSwxLDAsMCwwLDMsN1YyNWExLDEsMCwwLDAsMSwxSDI4YTEsMSwwLDAsMCwxLTFWMTFhMSwxLDAsMCwwLTEtMUgxNS4zM2ExLDEsMCwwLDEtLjc2LS4zNkwxMS41Myw2WiIvPjwvZz48L3N2Zz4=")
-            margin 0
-            padding 0
-            margin-right 0.5rem
-
-        input
-          padding 0
-          margin 0
-          position absolute
-          opacity 0
-          z-index -1
-
-        input:checked + label:before
-          content url("data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pjxzdmcgdmlld0JveD0iMCAwIDMyIDMyIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxkZWZzPjxzdHlsZT4uY2xzLTF7ZmlsbDojMTAxODIwO308L3N0eWxlPjwvZGVmcz48dGl0bGUvPjxnIGRhdGEtbmFtZT0iTGF5ZXIgMzkiIGlkPSJMYXllcl8zOSI+PHBhdGggY2xhc3M9ImNscy0xIiBkPSJNNCwyOGEzLDMsMCwwLDEtMy0zVjdBMywzLDAsMCwxLDQsNGg3YTEsMSwwLDAsMSwuNzcuMzZMMTQuOCw4SDI3YTEsMSwwLDAsMSwwLDJIMTQuMzNhMSwxLDAsMCwxLS43Ni0uMzZMMTAuNTMsNkg0QTEsMSwwLDAsMCwzLDdWMjVhMSwxLDAsMCwwLDEsMSwxLDEsMCwwLDEsMCwyWiIvPjxwYXRoIGNsYXNzPSJjbHMtMSIgZD0iTTI1LjM4LDI4SDRhMSwxLDAsMCwxLTEtMS4yMWwzLTE0QTEsMSwwLDAsMSw3LDEySDMwYTEsMSwwLDAsMSwxLDEuMjFMMjguMzIsMjUuNjNBMywzLDAsMCwxLDI1LjM4LDI4Wk01LjI0LDI2SDI1LjM4YTEsMSwwLDAsMCwxLS43OUwyOC43NiwxNGgtMjFaIi8+PC9nPjwvc3ZnPg==")
-
-        input + label + ul
-          animation-name slideOut
-          animation-duration 0.25s
-          animation-fill-mode both
-
-        input:checked + label + ul
-          animation-name slideIn
-          animation-duration 0.25s
-          animation-fill-mode both
+            [slot = "opened-label"]
+              &:before
+                content url("data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pjxzdmcgdmlld0JveD0iMCAwIDMyIDMyIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxkZWZzPjxzdHlsZT4uY2xzLTF7ZmlsbDojMTAxODIwO308L3N0eWxlPjwvZGVmcz48dGl0bGUvPjxnIGRhdGEtbmFtZT0iTGF5ZXIgMzgiIGlkPSJMYXllcl8zOCI+PHBhdGggY2xhc3M9ImNscy0xIiBkPSJNMjgsMjhINGEzLDMsMCwwLDEtMy0zVjdBMywzLDAsMCwxLDQsNGg4YTEsMSwwLDAsMSwuNzcuMzZMMTUuOCw4SDI4YTMsMywwLDAsMSwzLDNWMjVBMywzLDAsMCwxLDI4LDI4Wk00LDZBMSwxLDAsMCwwLDMsN1YyNWExLDEsMCwwLDAsMSwxSDI4YTEsMSwwLDAsMCwxLTFWMTFhMSwxLDAsMCwwLTEtMUgxNS4zM2ExLDEsMCwwLDEtLjc2LS4zNkwxMS41Myw2WiIvPjwvZz48L3N2Zz4=")
+            [slot = "closed-label"]
+              &:before
+                content url("data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pjxzdmcgdmlld0JveD0iMCAwIDMyIDMyIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxkZWZzPjxzdHlsZT4uY2xzLTF7ZmlsbDojMTAxODIwO308L3N0eWxlPjwvZGVmcz48dGl0bGUvPjxnIGRhdGEtbmFtZT0iTGF5ZXIgMzkiIGlkPSJMYXllcl8zOSI+PHBhdGggY2xhc3M9ImNscy0xIiBkPSJNNCwyOGEzLDMsMCwwLDEtMy0zVjdBMywzLDAsMCwxLDQsNGg3YTEsMSwwLDAsMSwuNzcuMzZMMTQuOCw4SDI3YTEsMSwwLDAsMSwwLDJIMTQuMzNhMSwxLDAsMCwxLS43Ni0uMzZMMTAuNTMsNkg0QTEsMSwwLDAsMCwzLDdWMjVhMSwxLDAsMCwwLDEsMSwxLDEsMCwwLDEsMCwyWiIvPjxwYXRoIGNsYXNzPSJjbHMtMSIgZD0iTTI1LjM4LDI4SDRhMSwxLDAsMCwxLTEtMS4yMWwzLTE0QTEsMSwwLDAsMSw3LDEySDMwYTEsMSwwLDAsMSwxLDEuMjFMMjguMzIsMjUuNjNBMywzLDAsMCwxLDI1LjM4LDI4Wk01LjI0LDI2SDI1LjM4YTEsMSwwLDAsMCwxLS43OUwyOC43NiwxNGgtMjFaIi8+PC9nPjwvc3ZnPg==")
 
     .actions
 

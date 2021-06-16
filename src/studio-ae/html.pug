@@ -4,9 +4,10 @@ mixin list(items)
     each item in items
       if Array.isArray(item)
         li( tabindex = 0)
-          input(type = "checkbox" id = `tree-toggle-${counter}`)
-          label( for=`tree-toggle-${counter++}` )= item[0]
-          +list(item[1])
+          vellum-drawer
+            span( slot = "opened-label")= item[0]
+            span( slot = "closed-label")= item[0]
+            div( slot = "content" ): +list(item[1])
       else
         li( tabindex = 0 ): span= item
 
