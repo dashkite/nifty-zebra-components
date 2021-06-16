@@ -1,12 +1,11 @@
-- counter = 0
 mixin list(items)
   ul
     each item in items
       if Array.isArray(item)
         li( tabindex = 0)
           vellum-drawer
-            span( slot = "opened-label")= item[0]
             span( slot = "closed-label")= item[0]
+            span( slot = "opened-label")= item[0]
             div( slot = "content" ): +list(item[1])
       else
         li( tabindex = 0 ): span= item
@@ -16,19 +15,22 @@ div.navigator
     +list(project.drive)
 
   .actions
-    input(type = "checkbox" id = "actions-toggle" )
-    label( for = "actions-toggle" )
-      svg: use( href= "/media/images/sprites.svg#file-actions" )
-      span Actions
-    .drawer
-      ul
-        li
-          button
-            svg: use( href= "/media/images/sprites.svg#new-file" )
-            span New File
-        li
-          button
-            svg: use( href= "/media/images/sprites.svg#new-folder" )
-            span New Folder
+    vellum-drawer
+      div( slot = "closed-label")
+        svg: use( href= "/media/images/sprites.svg#file-actions" )
+        span Show Actions
+      div( slot = "opened-label" )
+        svg: use( href= "/media/images/sprites.svg#file-actions" )
+        span Hide Actions
+      div( slot = "content" )
+        ul
+          li
+            button
+              svg: use( href= "/media/images/sprites.svg#new-file" )
+              span New File
+          li
+            button
+              svg: use( href= "/media/images/sprites.svg#new-folder" )
+              span New Folder
 
 div.editor
