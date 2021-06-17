@@ -1,9 +1,20 @@
+
 row-gap(size)
   margin -size
   & > *
     margin size
 
 :host
+
+  --local-closed-folder-icon\
+    var(--closed-folder-icon, embedurl("closed-folder.svg", "utf8"))
+
+  --local-opened-folder-icon\
+    var(--opened-folder-icon, embedurl("opened-folder.svg", "utf8"))
+
+  --local-file-icon\
+    var(--file-icon, embedurl("file.svg", "utf8"))
+
   display flex
   row-gap 1rem
   border 1px solid var(--soft-background)
@@ -23,15 +34,25 @@ row-gap(size)
 
     .directory
 
+      padding-left 1rem
+
       ul
         list-style-type none
-        padding 0
         margin 0
+        padding 0
 
         li
-          padding 0.5rem
           margin 0
+          padding 0
+          margin-bottom 0.5rem
           border-radius 0.25rem
+
+          & > span::before
+            content var(--local-file-icon)
+            display inline-block
+            height 1.25rem
+            width 1.25rem
+            margin-right 0.5rem
 
           &:focus
             background var(--dark-background)
@@ -41,7 +62,7 @@ row-gap(size)
               filter brightness(0) invert(1)
 
           ul
-            margin-left 1.5rem
+            margin-left 1.25rem
 
           & > vellum-drawer
             [slot $= "-label"]
@@ -55,10 +76,10 @@ row-gap(size)
 
             [slot = "closed-label"]
               &:before
-                content url("data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pjxzdmcgdmlld0JveD0iMCAwIDMyIDMyIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxkZWZzPjxzdHlsZT4uY2xzLTF7ZmlsbDojMTAxODIwO308L3N0eWxlPjwvZGVmcz48dGl0bGUvPjxnIGRhdGEtbmFtZT0iTGF5ZXIgMzgiIGlkPSJMYXllcl8zOCI+PHBhdGggY2xhc3M9ImNscy0xIiBkPSJNMjgsMjhINGEzLDMsMCwwLDEtMy0zVjdBMywzLDAsMCwxLDQsNGg4YTEsMSwwLDAsMSwuNzcuMzZMMTUuOCw4SDI4YTMsMywwLDAsMSwzLDNWMjVBMywzLDAsMCwxLDI4LDI4Wk00LDZBMSwxLDAsMCwwLDMsN1YyNWExLDEsMCwwLDAsMSwxSDI4YTEsMSwwLDAsMCwxLTFWMTFhMSwxLDAsMCwwLTEtMUgxNS4zM2ExLDEsMCwwLDEtLjc2LS4zNkwxMS41Myw2WiIvPjwvZz48L3N2Zz4=")
+                content var(--local-closed-folder-icon)
             [slot = "opened-label"]
               &:before
-                content url("data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pjxzdmcgdmlld0JveD0iMCAwIDMyIDMyIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxkZWZzPjxzdHlsZT4uY2xzLTF7ZmlsbDojMTAxODIwO308L3N0eWxlPjwvZGVmcz48dGl0bGUvPjxnIGRhdGEtbmFtZT0iTGF5ZXIgMzkiIGlkPSJMYXllcl8zOSI+PHBhdGggY2xhc3M9ImNscy0xIiBkPSJNNCwyOGEzLDMsMCwwLDEtMy0zVjdBMywzLDAsMCwxLDQsNGg3YTEsMSwwLDAsMSwuNzcuMzZMMTQuOCw4SDI3YTEsMSwwLDAsMSwwLDJIMTQuMzNhMSwxLDAsMCwxLS43Ni0uMzZMMTAuNTMsNkg0QTEsMSwwLDAsMCwzLDdWMjVhMSwxLDAsMCwwLDEsMSwxLDEsMCwwLDEsMCwyWiIvPjxwYXRoIGNsYXNzPSJjbHMtMSIgZD0iTTI1LjM4LDI4SDRhMSwxLDAsMCwxLTEtMS4yMWwzLTE0QTEsMSwwLDAsMSw3LDEySDMwYTEsMSwwLDAsMSwxLDEuMjFMMjguMzIsMjUuNjNBMywzLDAsMCwxLDI1LjM4LDI4Wk01LjI0LDI2SDI1LjM4YTEsMSwwLDAsMCwxLS43OUwyOC43NiwxNGgtMjFaIi8+PC9nPjwvc3ZnPg==")
+                content var(--local-opened-folder-icon)
 
     .actions
       vellum-drawer
@@ -81,6 +102,7 @@ row-gap(size)
             margin-right 1rem
 
         [slot = "content"]
+          padding-left 1rem
           & > ul
             list-style-type none
             padding 0

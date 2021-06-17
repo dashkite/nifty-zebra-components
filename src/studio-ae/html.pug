@@ -4,14 +4,15 @@ mixin list(items)
       if Array.isArray(item)
         li( tabindex = 0)
           vellum-drawer
-            span( slot = "closed-label")= item[0]
-            span( slot = "opened-label")= item[0]
+            span( slot = "closed-label" )= item[0]
+            span( slot = "opened-label" )= item[0]
             div( slot = "content" ): +list(item[1])
       else
         li( tabindex = 0 ): span= item
 
 div.navigator
   .directory
+    p.title= project.title
     +list(project.drive)
 
   .actions
