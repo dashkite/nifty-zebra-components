@@ -4,34 +4,53 @@ mixin list(items)
       if Array.isArray(item)
         li( tabindex = 0)
           vellum-drawer
-            span( slot = "closed-label" )= item[0]
-            span( slot = "opened-label" )= item[0]
+            div( slot = "closed-label" )
+              include /src/media/images/closed-folder.svg
+              span= item[0]
+            div( slot = "opened-label" )
+              include /src/media/images/opened-folder.svg
+              span= item[0]
             div( slot = "content" ): +list(item[1])
       else
-        li( tabindex = 0 ): span= item
+        li( tabindex = 0 )
+          div
+            include /src/media/images/file.svg
+            span= item
+.main
 
-div.navigator
-  .directory
-    p.title= project.title
-    +list(project.drive)
+  .navigator
+    .directory
+      p.title
+        include /src/media/images/project.svg
+        span= project.title
+      +list(project.drive)
 
-  .actions
-    vellum-drawer
-      div( slot = "closed-label")
-        svg: use( href= "/media/images/sprites.svg#file-actions" )
-        span Show Actions
-      div( slot = "opened-label" )
-        svg: use( href= "/media/images/sprites.svg#file-actions" )
-        span Hide Actions
-      div( slot = "content" )
-        ul
-          li
-            button
-              svg: use( href= "/media/images/sprites.svg#new-file" )
-              span New File
-          li
-            button
-              svg: use( href= "/media/images/sprites.svg#new-folder" )
-              span New Folder
+    .actions
+      vellum-drawer
+        div( slot = "closed-label")
+          include /src/media/images/file-actions.svg
+          span Show Actions
+        div( slot = "opened-label" )
+          include /src/media/images/file-actions.svg
+          span Hide Actions
+        div( slot = "content" )
+          ul
+            li
+              button( name = "new-folder" )
+                include /src/media/images/new-folder.svg
+                span New Folder
+            li
+              button
+                include /src/media/images/new-file.svg
+                span New File
+            li
+              button
+                include /src/media/images/rename.svg
+                span Rename
 
-div.editor
+            li
+              button
+                include /src/media/images/delete.svg
+                span Delete
+
+  .editor

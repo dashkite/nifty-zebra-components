@@ -38,6 +38,8 @@
   "dependencies": {
     "@codemirror/basic-setup": "^0.18.2",
     "@codemirror/legacy-modes": "^0.18.0",
-    "@codemirror/stream-parser": "^0.18.2"
+    "@codemirror/stream-parser": "^0.18.2",
+    "@dashkite/carbon": "file:../carbon",
+    "split.js": "^1.6.4"
   }
 }

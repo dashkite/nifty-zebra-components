@@ -5,36 +5,40 @@ row-gap(size)
     margin size
 
 :host
+  display block
 
-  --local-closed-folder-icon\
-    var(--closed-folder-icon, embedurl("closed-folder.svg", "utf8"))
-
-  --local-opened-folder-icon\
-    var(--opened-folder-icon, embedurl("opened-folder.svg", "utf8"))
-
-  --local-file-icon\
-    var(--file-icon, embedurl("file.svg", "utf8"))
-
+.main
   display flex
-  row-gap 1rem
+  height 100%
   border 1px solid var(--soft-background)
-  background-color var(--soft-background)
-
-  // adapted from: https://codepen.io/rstrangh/pen/dGweRo
+  background var(--soft-background)
+  row-gap 0.5rem
 
   .navigator
     display flex
     flex-direction column
     justify-content space-between
-    flex 1
-    max-width 24rem
+    margin 1rem 0 1rem 1rem
+
+    //flex 1
+    //max-width 24rem
     font-size 1rem
     line-height 1.5rem
+    color #333
     background-color var(--background)
+    border-radius 0.25rem
 
     .directory
 
       padding-left 1rem
+
+      .title
+        display flex
+        align-items center
+        & > svg
+          width 1.25rem
+          height 1.25rem
+          margin-right 0.5rem
 
       ul
         list-style-type none
@@ -43,43 +47,37 @@ row-gap(size)
 
         li
           margin 0
-          padding 0
-          margin-bottom 0.5rem
+          padding 0.25rem
           border-radius 0.25rem
 
-          & > span::before
-            content var(--local-file-icon)
-            display inline-block
-            height 1.25rem
-            width 1.25rem
-            margin-right 0.5rem
+          ul
+            margin-left 1.5rem
+
+
+          & > div
+            display flex
+            align-items center
+            & > svg
+              display inline-block
+              fill currentColor
+              height 1.25rem
+              width 1.25rem
+              margin-right 0.5rem
 
           &:focus
             background var(--dark-background)
             outline none
             color white
-            :before
-              filter brightness(0) invert(1)
-
-          ul
-            margin-left 1.25rem
 
           & > vellum-drawer
             [slot $= "-label"]
               display inline-flex
               align-items center
-              &:before
+              svg
                 display inline-block
                 height 1.25rem
                 width 1.25rem
                 margin-right 0.5rem
-
-            [slot = "closed-label"]
-              &:before
-                content var(--local-closed-folder-icon)
-            [slot = "opened-label"]
-              &:before
-                content var(--local-opened-folder-icon)
 
     .actions
       vellum-drawer
@@ -99,7 +97,7 @@ row-gap(size)
             fill currentColor
             width 1.5rem
             height 1.5rem
-            margin-right 1rem
+            margin-right 0.5rem
 
         [slot = "content"]
           padding-left 1rem
@@ -127,14 +125,24 @@ row-gap(size)
 
                 & > svg
                   fill currentColor
-                  width 1.5rem
-                  height 1.5rem
-                  margin-right 1rem
+                  width 1.25rem
+                  height 1.25rem
+                  margin-right 0.5rem
+
+  .gutter
+    background white
+    cursor col-resize
+    width 8px
+    height 6rem
+    align-self center
 
   .editor
+    margin 1rem 1rem 1rem 0
+    border-radius 0.25rem
+    padding 1rem
     background-color var(--background)
-    flex 3
-    max-width 80ch
+    //flex 3
+    //max-width 80ch
     font-size 1rem
 
 @keyframes slideIn {

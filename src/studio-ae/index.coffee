@@ -16,6 +16,7 @@ import {
 
 import {
   editor
+  resize
 } from "./helpers"
 
 class extends c.Handle
@@ -33,6 +34,7 @@ class extends c.Handle
         c.render html
         k.read "handle"
         k.peek editor
+        k.peek resize
       ]
     ]
   ]
