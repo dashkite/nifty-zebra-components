@@ -2,7 +2,7 @@ mixin list(items)
   ul
     each item in items
       if Array.isArray(item)
-        li( tabindex = 0)
+        li.folder( tabindex = 0)
           vellum-drawer
             div( slot = "closed-label" )
               include /src/media/images/closed-folder.svg
@@ -12,18 +12,20 @@ mixin list(items)
               span= item[0]
             div( slot = "content" ): +list(item[1])
       else
-        li( tabindex = 0 )
+        li.file( tabindex = 0 )
           div
             include /src/media/images/file.svg
             span= item
 .main
 
   .navigator
+
     .directory
       p.title
         include /src/media/images/project.svg
         span= project.title
       +list(project.drive)
+
 
     .actions
       vellum-drawer
@@ -36,21 +38,25 @@ mixin list(items)
         div( slot = "content" )
           ul
             li
+              button( name = "open-project" )
+                include /src/media/images/project.svg
+                span Open Project&hellip;
+            li
               button( name = "new-folder" )
                 include /src/media/images/new-folder.svg
-                span New Folder
+                span New Folder&hellip;
             li
-              button
+              button( name = "new-file" )
                 include /src/media/images/new-file.svg
-                span New File
-            li
-              button
+                span New File&hellip;
+            li.selected
+              button( name = "rename" )
                 include /src/media/images/rename.svg
-                span Rename
+                span Rename&hellip;
 
-            li
-              button
+            li.selected
+              button( name = "delete" )
                 include /src/media/images/delete.svg
-                span Delete
+                span Delete&hellip;
 
   .editor
