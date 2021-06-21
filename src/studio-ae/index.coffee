@@ -21,10 +21,6 @@ import {
   resize
 } from "./helpers"
 
-contains =  (selector) ->
-  (event) ->
-    event.composedPath().find (el) -> el.matches? selector
-
 class extends c.Handle
 
   _.mixin @, [
@@ -43,22 +39,14 @@ class extends c.Handle
         k.peek resize
       ]
       c.event "click", [
-        ks.write "event"
-        ks.push contains ".file, .folder"
-        ks.test _.isDefined, _.pipe [
-          ks.read "event"
-          # c.intercept
-          ks.discard
-          ks.read "handle"
-          ks.peek (handle) ->
-            handle.root.querySelector ".navigator"
-              .classList.add "selected"
-            for el in handle.root.querySelectorAll ".navigator .selected"
-              el.classList.remove "selected"
-          ks.discard
-          ks.peek (el) ->
-            console.log el
-            el.classList.add "selected"
+        c.within ".file, .folder", [
+          ks.peek (el, event, handle) ->
+            elx = handle.root.querySelectorAll ".directory .selected"
+            for _el in elx when _el != el
+              _el.classList.remove "selected"
+            handle.root.querySelector ".directory"
+              .classList.toggle "selected", el.classList.toggle "selected"
+
         ]
       ]
     ]
