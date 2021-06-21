@@ -49,13 +49,13 @@ mixin list(items)
               button( name = "new-file" )
                 include /src/media/images/new-file.svg
                 span New File&hellip;
-            li.selected
-              button( name = "rename" )
+            li
+              button.if-selection( name = "rename" disabled )
                 include /src/media/images/rename.svg
                 span Rename&hellip;
 
-            li.selected
-              button( name = "delete" )
+            li
+              button.if-selection( name = "delete" disabled )
                 include /src/media/images/delete.svg
                 span Delete&hellip;
 

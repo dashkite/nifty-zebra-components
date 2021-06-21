@@ -41,8 +41,7 @@ svg
 .main
   display flex
   height 100%
-  border 1px solid var(--soft-background)
-  background var(--soft-background)
+  background var(--secondary-background)
   row-gap 0.5rem
 
   .navigator
@@ -52,9 +51,9 @@ svg
     margin 1rem 0 1rem 1rem
     font-size 1rem
     line-height 1.5rem
-    color var(--normal-text-color)
-    background-color var(--background)
-    border-radius 0.25rem
+    color var(--body-text-color)
+    background-color var(--background-color)
+    border-radius var(--small-border-radius)
 
     .directory
       &.selected + .actions li.selected
@@ -74,7 +73,7 @@ svg
         li
           margin 0
           padding 0.25rem
-          border-radius 0.25rem
+          border-radius var(--small-border-radius)
           cursor pointer
 
           &:focus
@@ -82,10 +81,10 @@ svg
 
           &.folder.selected
             & vellum-drawer > [slot $= "-label"]
-              background var(--dark-background)
+              background var(--accent-color)
               color white
           &.file.selected > div
-            background var(--dark-background)
+            background var(--accent-color)
             color white
 
           ul
@@ -96,7 +95,7 @@ svg
             display flex
             align-items center
             padding 0.25rem
-            border-radius 0.25rem
+            border-radius var(--small-border-radius)
             cursor pointer
 
           & > vellum-drawer
@@ -104,7 +103,7 @@ svg
               display inline-flex
               align-items center
               padding 0.25rem
-              border-radius 0.25rem
+              border-radius var(--small-border-radius)
               cursor pointer
 
     .actions
@@ -113,10 +112,10 @@ svg
           display flex
           justify-content center
           align-items center
-          border 1px solid var(--dark-background)
-          border-radius 0.25rem
-          color var(--button-text)
-          background transparent
+          border 1px solid var(--button-border-color)
+          border-radius var(--small-border-radius)
+          color var(--button-text-color)
+          background var(-button-background)
           margin 0.5rem
           padding 1rem
           font-size 0.9rem
@@ -138,15 +137,12 @@ svg
             & > li
               padding 0.5rem
               margin 0
-              border-radius 0.25rem
-
-              &.selected
-                display none
+              border-radius var(--small-border-radius)
 
               & > button
                 display flex
                 align-items center
-                color var(--button-text)
+                color var(--button-text-color)
                 background transparent
                 border none
                 margin-left 0.5rem
@@ -154,6 +150,12 @@ svg
                 padding 0.25rem
                 font-size 0.9rem
                 line-height 1rem
+                cursor pointer
+
+                &:disabled
+                  color var(--disabled-button-text-color)
+                  opacity var(--disabled-button-opacity)
+                  background var(--disabled-button-background)
 
   .gutter
     background white
@@ -164,7 +166,7 @@ svg
 
   .editor
     margin 1rem 1rem 1rem 0
-    border-radius 0.25rem
+    border-radius var(--small-border-radius)
     padding 1rem
     background-color var(--background)
     font-size 1rem

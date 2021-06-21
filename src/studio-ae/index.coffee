@@ -44,8 +44,11 @@ class extends c.Handle
             elx = handle.root.querySelectorAll ".directory .selected"
             for _el in elx when _el != el
               _el.classList.remove "selected"
-            handle.root.querySelector ".directory"
-              .classList.toggle "selected", el.classList.toggle "selected"
+            selected = el.classList.toggle "selected"
+            elx = handle.root.querySelectorAll "button.if-selection"
+            console.log {selected, elx}
+            for _el in elx
+              _el.disabled = !selected
 
         ]
       ]
