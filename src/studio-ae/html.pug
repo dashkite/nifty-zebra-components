@@ -1,21 +1,22 @@
 mixin list(items)
   ul
-    each item in items
-      if Array.isArray(item)
-        li.folder( tabindex = 0)
+    each description, name in items
+      - console.log({name, description})
+      if description.type == "directory"
+        li.folder( tabindex = 0 data-path = description.path )
           vellum-drawer
             div( slot = "closed-label" )
               include /src/media/images/closed-folder.svg
-              span= item[0]
+              span= description.name
             div( slot = "opened-label" )
               include /src/media/images/opened-folder.svg
-              span= item[0]
-            div( slot = "content" ): +list(item[1])
+              span= description.name
+            div( slot = "content" ): +list(description.content)
       else
-        li.file( tabindex = 0 )
+        li.file( tabindex = 0 data-path = description.path )
           div
             include /src/media/images/file.svg
-            span= item
+            span= description.name
 .main
 
   .navigator
@@ -60,3 +61,5 @@ mixin list(items)
                 span Delete&hellip;
 
   .editor
+    vellum-tabs
+      //- this is intentionally blank

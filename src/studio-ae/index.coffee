@@ -35,7 +35,7 @@ class extends c.Handle
         k.mpoke (project, description) -> { project, description }
         c.render html
         k.read "handle"
-        k.peek editor
+        # k.peek editor
         k.peek resize
       ]
       c.event "click", [
@@ -46,10 +46,10 @@ class extends c.Handle
               _el.classList.remove "selected"
             selected = el.classList.toggle "selected"
             elx = handle.root.querySelectorAll "button.if-selection"
-            console.log {selected, elx}
             for _el in elx
               _el.disabled = !selected
-
+            if selected
+              editor handle, ""
         ]
       ]
     ]
