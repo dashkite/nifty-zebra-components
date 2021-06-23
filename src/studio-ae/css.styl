@@ -38,135 +38,124 @@ svg
 :host
   display block
 
-.main
+.navigator
   display flex
-  height 100%
-  background var(--secondary-background)
-  row-gap 0.5rem
+  flex-direction column
+  justify-content space-between
+  margin 1rem 0 1rem 1rem
+  font-size 1rem
+  line-height 1.5rem
+  color var(--body-text-color)
+  background-color var(--background-color)
+  border-radius var(--small-border-radius)
+  min-width 15rem
 
-  .navigator
-    display flex
-    flex-direction column
-    justify-content space-between
-    margin 1rem 0 1rem 1rem
-    font-size 1rem
-    line-height 1.5rem
-    color var(--body-text-color)
-    background-color var(--background-color)
-    border-radius var(--small-border-radius)
+  .directory
+    &.selected + .actions li.selected
+      display block
 
-    .directory
-      &.selected + .actions li.selected
-        display block
+    padding-left 1rem
 
-      padding-left 1rem
+    .title
+      display flex
+      align-items center
 
-      .title
-        display flex
-        align-items center
+    ul
+      list-style-type none
+      margin 0
+      padding 0
 
-      ul
-        list-style-type none
+      li
         margin 0
-        padding 0
+        padding 0.25rem
+        border-radius var(--small-border-radius)
+        cursor pointer
 
-        li
-          margin 0
+        &:focus
+          outline none
+
+        &.folder.selected
+          & vellum-drawer > [slot $= "-label"]
+            background var(--accent-color)
+            color white
+        &.file.selected > div
+          background var(--accent-color)
+          color white
+
+        ul
+          margin-left 1.5rem
+
+
+        & > div
+          display flex
+          align-items center
           padding 0.25rem
           border-radius var(--small-border-radius)
           cursor pointer
 
-          &:focus
-            outline none
-
-          &.folder.selected
-            & vellum-drawer > [slot $= "-label"]
-              background var(--accent-color)
-              color white
-          &.file.selected > div
-            background var(--accent-color)
-            color white
-
-          ul
-            margin-left 1.5rem
-
-
-          & > div
-            display flex
+        & > vellum-drawer
+          [slot $= "-label"]
+            display inline-flex
             align-items center
             padding 0.25rem
             border-radius var(--small-border-radius)
             cursor pointer
 
-          & > vellum-drawer
-            [slot $= "-label"]
-              display inline-flex
+  .actions
+    vellum-drawer
+      [slot $= "-label" ]
+        display flex
+        justify-content center
+        align-items center
+        border 1px solid var(--button-border-color)
+        border-radius var(--small-border-radius)
+        color var(--button-text-color)
+        background var(-button-background)
+        margin 0.5rem
+        padding 1rem
+        font-size 0.9rem
+        line-height 1rem
+        & > svg
+          fill currentColor
+          width 1.5rem
+          height 1.5rem
+          margin-right 0.5rem
+
+      [slot = "content"]
+        padding-left 1rem
+
+        & > ul
+          list-style-type none
+          padding 0
+          margin 0
+
+          & > li
+            padding 0.5rem
+            margin 0
+            border-radius var(--small-border-radius)
+
+            & > button
+              display flex
               align-items center
+              color var(--button-text-color)
+              background transparent
+              border none
+              margin-left 0.5rem
+              margin-top -0.5rem
               padding 0.25rem
-              border-radius var(--small-border-radius)
+              font-size 0.9rem
+              line-height 1rem
               cursor pointer
 
-    .actions
-      vellum-drawer
-        [slot $= "-label" ]
-          display flex
-          justify-content center
-          align-items center
-          border 1px solid var(--button-border-color)
-          border-radius var(--small-border-radius)
-          color var(--button-text-color)
-          background var(-button-background)
-          margin 0.5rem
-          padding 1rem
-          font-size 0.9rem
-          line-height 1rem
-          & > svg
-            fill currentColor
-            width 1.5rem
-            height 1.5rem
-            margin-right 0.5rem
+              &:disabled
+                color var(--disabled-button-text-color)
+                opacity var(--disabled-button-opacity)
+                background var(--disabled-button-background)
 
-        [slot = "content"]
-          padding-left 1rem
 
-          & > ul
-            list-style-type none
-            padding 0
-            margin 0
-
-            & > li
-              padding 0.5rem
-              margin 0
-              border-radius var(--small-border-radius)
-
-              & > button
-                display flex
-                align-items center
-                color var(--button-text-color)
-                background transparent
-                border none
-                margin-left 0.5rem
-                margin-top -0.5rem
-                padding 0.25rem
-                font-size 0.9rem
-                line-height 1rem
-                cursor pointer
-
-                &:disabled
-                  color var(--disabled-button-text-color)
-                  opacity var(--disabled-button-opacity)
-                  background var(--disabled-button-background)
-
-  .gutter
-    background white
-    cursor col-resize
-    width 8px
-    height 6rem
-    align-self center
-
-  .editor
-    margin 1rem 1rem 1rem 0
-    border-radius var(--small-border-radius)
-    padding 1rem
-    background-color var(--background)
-    font-size 1rem
+.editor
+  margin 1rem 1rem 1rem 0
+  border-radius var(--small-border-radius)
+  padding 1rem
+  background-color var(--background)
+  font-size 1rem

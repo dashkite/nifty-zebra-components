@@ -18,7 +18,7 @@ import {
 
 import {
   editor
-  resize
+  split
 } from "./helpers"
 
 class extends c.Handle
@@ -29,27 +29,27 @@ class extends c.Handle
     c.initialize [
       c.shadow
       c.sheets main: css
-      c.activate [
-        c.description
-        k.push Project.get
-        k.mpoke (project, description) -> { project, description }
+      c.observe "data", [
+        k.peek (data) -> console.log data
         c.render html
         k.read "handle"
         # k.peek editor
-        k.peek resize
+        # k.peek split
+      ]
+      # c.describe [
+      #   c.assign "data"
+      # ]
+      c.activate [
+        k.push Project.get
+        c.assign "data"
       ]
       c.event "click", [
         c.within ".file, .folder", [
           ks.peek (el, event, handle) ->
-            elx = handle.root.querySelectorAll ".directory .selected"
-            for _el in elx when _el != el
-              _el.classList.remove "selected"
-            selected = el.classList.toggle "selected"
-            elx = handle.root.querySelectorAll "button.if-selection"
-            for _el in elx
-              _el.disabled = !selected
-            if selected
-              editor handle, ""
+            if handle.data.selected != el.dataset.path
+              handle.data.selected = el.dataset.path
+            else
+              handle.data.selected = undefined
         ]
       ]
     ]

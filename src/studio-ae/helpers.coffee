@@ -1,18 +1,18 @@
 editor = (handle, content) ->
-  
 
-import split from "split.js"
 
-resize = (handle) ->
-  split [
+import _split from "split.js"
+
+split = (handle) ->
+  _split [
     handle.root.querySelector ".navigator"
     handle.root.querySelector ".editor"
   ],
-  sizes: [ 25, 75 ]
+  sizes: handle.preferences?.sizes ? [ 25, 75 ]
   gutterSize: 5
   minSize: [ 240, 720 ]
-  onDragEnd: ->
-    # TODO do something to remember the setting
+  onDragEnd: (sizes) ->
+    handle.preferences ?= {}
+    handle.preferences.sizes = sizes
 
-
-export { editor, resize }
+export { editor, split }

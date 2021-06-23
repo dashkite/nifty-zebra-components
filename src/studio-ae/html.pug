@@ -1,9 +1,10 @@
 mixin list(items)
   ul
     each description, name in items
-      - console.log({name, description})
+      - var classes = {}
+      - classes.selected = (description.path === selected)
       if description.type == "directory"
-        li.folder( tabindex = 0 data-path = description.path )
+        li.folder( tabindex = 0 data-path = description.path class = classes )
           vellum-drawer
             div( slot = "closed-label" )
               include /src/media/images/closed-folder.svg
@@ -13,19 +14,20 @@ mixin list(items)
               span= description.name
             div( slot = "content" ): +list(description.content)
       else
-        li.file( tabindex = 0 data-path = description.path )
+        li.file( tabindex = 0 data-path = description.path class = classes )
           div
             include /src/media/images/file.svg
             span= description.name
-.main
 
-  .navigator
+vellum-split( data-sizes = sizes )
+
+  .navigator( slot = "navigator" )
 
     .directory
       p.title
         include /src/media/images/project.svg
-        span= project.title
-      +list(project.drive)
+        span= title
+      +list(drive)
 
 
     .actions
@@ -59,7 +61,6 @@ mixin list(items)
               button.if-selection( name = "delete" disabled )
                 include /src/media/images/delete.svg
                 span Delete&hellip;
-
-  .editor
-    vellum-tabs
+  .editor( slot = "editor" )
+    //- vellum-tabs
       //- this is intentionally blank

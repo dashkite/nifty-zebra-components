@@ -18,6 +18,7 @@ Project =
   get: ->
     name: "hello"
     title: "Hello, World"
+    sizes: [ 15, 85 ]
     drive: normalize
       "/css/index.styl": ""
       "/src/index.coffee": ""
