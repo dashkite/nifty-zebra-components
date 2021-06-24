@@ -9,19 +9,19 @@ set = (root, keys, name, value) ->
 
 normalize = (drive) ->
   r =
-    files: {}
+    tree: {}
     drive: {}
   for path, content of drive
-    [, keys..., name ] = path.split "/"
     entry = { type: "file", path, name, content }
-    r.files[path] = entry
-    set r.drive, keys, name, entry
+    set r.drive[path], entry
+    [, keys..., name ] = path.split "/"
+    set r.tree, keys, name, entry
   r
 
 _drive =
-  "/css/index.styl": "// this is stylus code"
-  "/src/index.coffee": "# this is coffeescript code"
-  "/html/index.pug": "//- this is pug code"
+  "/css/index.styl": ""
+  "/src/index.coffee": ""
+  "/html/index.html": ""
 
 Project =
   get: ->

@@ -29,7 +29,6 @@ vellum-split( data-sizes = sizes )
         span= title
       +list(drive)
 
-
     .actions
       vellum-drawer
         div( slot = "closed-label")
@@ -61,6 +60,23 @@ vellum-split( data-sizes = sizes )
               button.if-selection( name = "delete" disabled )
                 include /src/media/images/delete.svg
                 span Delete&hellip;
+
   .editor( slot = "editor" )
-    //- vellum-tabs
-      //- this is intentionally blank
+    if Object.keys(tabs).length > 0
+      vellum-tabs
+        for tab, name in tabs
+          if (tab.path === selected)
+            span(
+              slot = `tab-${tab.path}`
+              data-key = tab.path
+              class = selected
+              selected
+            )= tab.name
+          else
+            span(
+              slot = `tab-${tab.path}`
+              data-key = tab.path
+            )= tab.name
+
+          div(slot = `panel-${tab.path}` data-key = tab.path)
+            studio-code-editor= tab.content
