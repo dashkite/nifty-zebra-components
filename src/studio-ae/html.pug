@@ -51,32 +51,47 @@ vellum-split( data-sizes = sizes )
               button( name = "new-file" )
                 include /src/media/images/new-file.svg
                 span New File&hellip;
-            li
-              button.if-selection( name = "rename" disabled )
-                include /src/media/images/rename.svg
-                span Rename&hellip;
+            if selected
+              li
+                button( name = "rename" )
+                  include /src/media/images/rename.svg
+                  span Rename&hellip;
+              li
+                button( name = "delete" )
+                  include /src/media/images/delete.svg
+                  span Delete&hellip;
+            else
+              li
+                button( name = "rename" disabled )
+                  include /src/media/images/rename.svg
+                  span Rename&hellip;
+              li
+                button( name = "delete" disabled )
+                  include /src/media/images/delete.svg
+                  span Delete&hellip;
 
-            li
-              button.if-selection( name = "delete" disabled )
-                include /src/media/images/delete.svg
-                span Delete&hellip;
 
   .editor( slot = "editor" )
     if Object.keys(tabs).length > 0
       vellum-tabs
         for tab, name in tabs
-          if (tab.path === selected)
-            span(
+          if (tab.path === selectedFile)
+            div(
               slot = `tab-${tab.path}`
               data-key = tab.path
-              class = selected
               selected
-            )= tab.name
+            )
+              span= tab.name
+              button( name = `close-${tab.path}` data-path = tab.path )
+                include /src/media/images/close.svg
           else
-            span(
+            div(
               slot = `tab-${tab.path}`
               data-key = tab.path
-            )= tab.name
+            )
+              span= tab.name
+              button( name = `close-${tab.path}` data-path = tab.path )
+                include /src/media/images/close.svg
 
           div(slot = `panel-${tab.path}` data-key = tab.path)
-            studio-code-editor= tab.content
+            studio-code-editor( data-language = tab.language )= tab.content
