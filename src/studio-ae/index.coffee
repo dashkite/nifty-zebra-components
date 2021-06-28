@@ -15,15 +15,6 @@ import {
   Project
 } from "./resources"
 
-contains = (selector, fx) ->
-  F.pipe [
-    Ks.push (event) -> event.composedPath().find (el) -> el.matches? selector
-    Ks.test T.isDefined, F.pipe fx
-  ]
-
-matches = (selector, fx) ->
-  Ks.test ((el) -> el.matches selector), F.pipe fx
-
 class extends C.Handle
 
   M.mixin @, [
@@ -55,11 +46,26 @@ class extends C.Handle
           C.assign "data"
         ]
       ]
-    C.event "click", [
-      contains "button[name^='close-']", [
-        Ks.peek (el, event, handle) ->
-          delete handle.data.tabs[el.dataset.path]
+      C.event "select", [
+        C.matches "vellum-tabs", [
+          Ks.push (event, handle) ->
+            selected: event.detail
+            selectedFile: event.detail
+          C.assign "data"
+        ]
       ]
-    ]
+      C.capture "click", [
+        C.within "button[name^='close-']", [
+          C.intercept
+          Ks.peek (el, event, handle) ->
+            if handle.data.selectedFile == el.dataset.path
+              paths = O.keys handle.data.tabs
+              for path, i in paths
+                if path == el.dataset.path
+                  handle.data.selectedFile = paths[ Math.abs i - 1 ]
+                  break
+            delete handle.data.tabs[el.dataset.path]
+        ]
+      ]
     ]
   ]

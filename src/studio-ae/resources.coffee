@@ -25,7 +25,6 @@ normalize = (drive) ->
   for path, content of drive
     [, keys..., name ] = path.split "/"
     language = languages[ extension name ]
-    console.log language
     entry = { type: "file", path, name, content, language }
     r.files[path] = entry
     set r.drive, keys, name, entry
