@@ -13,6 +13,9 @@
   },
   "license": "SEE LICENSE IN LICENSE.md",
   "author": "",
+  "imports": {
+    "#resources/*": "./build/browser/src/resources/*.js"
+  },
   "exports": {
     ".": {
       "browser": "./build/browser/src/index.js"

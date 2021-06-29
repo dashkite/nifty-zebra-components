@@ -8,12 +8,16 @@ import * as K from "@dashkite/katana"
 import * as Ks from "@dashkite/katana/sync"
 import * as C from "@dashkite/carbon"
 
+import Registry from "@dashkite/helium"
+
 import html from "./html"
 import css from "./css"
 
 import {
   Project
-} from "./resources"
+} from "#resources/project"
+
+initialize = K.peek (handle) -> handle.data = tabs: {}
 
 class extends C.Handle
 
@@ -21,7 +25,7 @@ class extends C.Handle
     C.tag "studio-ae"
     C.diff
     C.initialize [
-      K.peek (handle) -> handle.data = tabs: {}
+      initialize
       C.shadow
       C.sheets main: css
       C.observe "data", [
@@ -54,6 +58,12 @@ class extends C.Handle
           C.assign "data"
         ]
       ]
+      C.event "change", [
+        C.matches "vellum-split", [
+          Ks.peek (event) ->
+            # TODO save event detail (sizes) to project
+        ]
+      ]
       C.capture "click", [
         C.within "button[name^='close-']", [
           C.intercept
@@ -65,6 +75,17 @@ class extends C.Handle
                   handle.data.selectedFile = paths[ Math.abs i - 1 ]
                   break
             delete handle.data.tabs[el.dataset.path]
+        ]
+      ]
+      C.event "click", [
+        C.within "button[name='new-file']", [
+          C.intercept
+          Ks.peek (el, event, handle) ->
+            router = await Registry.get "router"
+            router.browse
+              name: "new file"
+              parameters:
+                name: handle.data.name
         ]
       ]
     ]

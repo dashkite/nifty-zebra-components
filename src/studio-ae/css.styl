@@ -1,27 +1,3 @@
-@keyframes slideIn {
-  0% {
-    max-height: 0;
-    opacity: 0;
-  }
-
-  100% {
-    max-height: 999px;
-    opacity: 1;
-  }
-}
-
-@keyframes slideOut {
-  0% {
-    height: auto;
-    opacity: 1;
-  }
-
-  100% {
-    height: 0;
-    opacity: 0;
-  }
-}
-
 row-gap(size)
   margin -size
   & > *
@@ -37,6 +13,16 @@ svg
 
 :host
   display block
+  background var(--secondary-background)
+
+vellum-split
+  --gutter-color transparent
+  --gutter-margin 9px
+  --gutter-width 3px
+  --gutter-height 4rem
+  --gutter-border-right 1px solid white
+  --gutter-border-left 1px solid white
+
 
 .navigator
   display flex

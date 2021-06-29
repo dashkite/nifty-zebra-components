@@ -46,7 +46,7 @@ Project =
     {
       name: "hello"
       title: "Hello, World"
-      sizes: [ 15, 85 ]
+      sizes: [ 20, 80 ]
       (normalize _drive)...
     }
 
