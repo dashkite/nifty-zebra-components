@@ -44,12 +44,16 @@ vellum-split( data-sizes = sizes )
                 include /src/media/images/project.svg
                 span Open Project&hellip;
             li
-              button( name = "new-folder" )
-                include /src/media/images/new-folder.svg
+              button( name = "add folder" data-directory = directory )
+                include /src/media/images/add-folder.svg
                 span New Folder&hellip;
             li
-              button( name = "new-file" )
-                include /src/media/images/new-file.svg
+              button(
+                name = "add file"
+                data-path = directory
+                data-extension = extension
+              )
+                include /src/media/images/add-file.svg
                 span New File&hellip;
             if selected
               li
@@ -57,8 +61,8 @@ vellum-split( data-sizes = sizes )
                   include /src/media/images/rename.svg
                   span Rename&hellip;
               li
-                button( name = "delete" )
-                  include /src/media/images/delete.svg
+                button( name = "remove" )
+                  include /src/media/images/remove.svg
                   span Delete&hellip;
             else
               li
@@ -66,8 +70,8 @@ vellum-split( data-sizes = sizes )
                   include /src/media/images/rename.svg
                   span Rename&hellip;
               li
-                button( name = "delete" disabled )
-                  include /src/media/images/delete.svg
+                button( name = "remove" disabled )
+                  include /src/media/images/remove.svg
                   span Delete&hellip;
 
 

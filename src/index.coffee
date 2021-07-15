@@ -1,3 +1,7 @@
+import "./studio-projects"
 import "./studio-ae"
 import "./studio-code-editor"
-import "./studio-new-file"
+import "./studio-add-file"
+import "./studio-add-folder"
+import "./studio-rename"
+import "./studio-remove"

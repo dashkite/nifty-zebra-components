@@ -1,0 +1,20 @@
+form
+  header
+
+    h1 Add Folder
+
+  section
+    .field
+      label
+        span Path
+        input( type = "text" required = "true" value = path)
+
+      .hint
+        :markdown
+          Enter the path for the folder you want to add,
+          ex: */css/themes*.
+
+  footer
+    nav
+      a(href = "#") Cancel
+      button Create

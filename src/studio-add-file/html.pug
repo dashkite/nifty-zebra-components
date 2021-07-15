@@ -1,0 +1,24 @@
+form
+  header
+
+    h1 Add File
+
+  section
+    .field
+      label
+        span Path
+        input(
+          type = "text"
+          required = "true"
+          value = path
+        )
+
+      .hint
+        :markdown
+          Enter the path for the file you want to add,
+          ex: */css/index.styl*.
+
+  footer
+    nav
+      a(href = "#") Cancel
+      button Create

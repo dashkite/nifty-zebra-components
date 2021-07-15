@@ -3,6 +3,8 @@ import * as A from "@dashkite/joy/array"
 import * as M from "@dashkite/joy/metaclass"
 import * as O from "@dashkite/joy/object"
 import * as T from "@dashkite/joy/type"
+import * as Te from "@dashkite/joy/text"
+import * as It from "@dashkite/joy/iterable"
 
 import * as K from "@dashkite/katana"
 import * as Ks from "@dashkite/katana/sync"
@@ -17,7 +19,27 @@ import {
   Project
 } from "#resources/project"
 
+Path =
+  directory: (path) -> It.join "/", (Te.split "/", path)[..-2]
+  basename: (path) -> A.last Te.split "/", path
+  extension: (path) -> (Te.split ".", (Path.basename path))[1]
+
 initialize = K.peek (handle) -> handle.data = tabs: {}
+
+decorate = (data) ->
+  if data.selectedFile?
+    {
+      data...
+      directory: Path.directory data.selected
+      extension: Path.extension data.selected
+    }
+  else if data.selected?
+    {
+      data...
+      directory: data.selected
+    }
+  else
+    data
 
 class extends C.Handle
 
@@ -29,6 +51,7 @@ class extends C.Handle
       C.shadow
       C.sheets main: css
       C.observe "data", [
+        K.poke decorate
         C.render html
         K.read "handle"
       ]
@@ -77,16 +100,16 @@ class extends C.Handle
             delete handle.data.tabs[el.dataset.path]
         ]
       ]
-      C.event "click", [
-        C.within "button[name='new-file']", [
-          C.intercept
-          Ks.peek (el, event, handle) ->
-            router = await Registry.get "router"
-            router.browse
-              name: "new file"
-              parameters:
-                name: handle.data.name
-        ]
+      C.click ".actions button", [
+        Ks.peek (el, event, handle) ->
+          router = await Registry.get "router"
+          router.browse
+            name: el.name
+            parameters: {
+              el.dataset...
+              name: handle.data.name
+              (decorate handle.data)...
+            }
       ]
     ]
   ]

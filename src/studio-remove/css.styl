@@ -1,0 +1,92 @@
+:host
+  display flex
+  justify-content center
+  margin 1rem 2rem
+  color var(--body-text-color)
+  background-color var(--background-color)
+  border-radius var(--small-border-radius)
+
+  form
+    display flex
+    flex-direction column
+    margin -1rem
+    & > *
+      margin 1rem
+
+    header
+      h1
+        margin 0
+        padding 0
+
+    section
+      display flex
+
+      .field
+        display flex
+        flex-direction column
+        width 20rem
+
+        & > *
+          margin 0.5rem
+
+        label
+          display flex
+          flex-direction column
+          margin -0.25rem
+          & > *
+            margin 0.25rem
+
+          span
+            font-weight bold
+            display block
+            margin-right 0.5rem
+
+          input
+            font-family interstate-mono, monospace
+            line-height 1.75rem
+            font-size 1.75rem * 0.6
+            display inline-block
+            border none
+            border-bottom 1px solid silver
+            border-top-left-radius var(--small-border-radius)
+            border-top-right-radius var(--small-border-radius)
+            padding 0.75rem 0.75rem 0.5rem
+            &:focus
+              outline none
+              background #D1C1D8
+
+
+        .hint
+          line-height 1.5rem
+          font-size 0.9rem
+          & > p
+            &:before
+              display inline-block
+              content "Hint:"
+              font-weight bold
+              margin-right 0.5em
+            display inline-block
+
+  footer
+    nav
+      display flex
+      align-items center
+      justify-content flex-end
+      margin -1rem
+      border-top 1px solid var(--border-color)
+      padding 1rem
+
+      & > *
+        margin 1rem
+
+      a
+        color var(--link-text-color)
+
+      button
+        line-height inherit
+        font-size inherit
+        background var(--button-background)
+        color var(--button-text-color)
+        border 1px solid var(--button-border-color)
+        border-radius var(--button-border-radius)
+        padding 0.5rem
