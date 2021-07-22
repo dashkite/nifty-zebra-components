@@ -40,62 +40,58 @@ vellum-split( data-sizes = sizes )
         div( slot = "content" )
           ul
             li
-              button( name = "open-project" )
+              button( name = "projects" )
                 include /src/media/images/project.svg
                 span Open Project&hellip;
             li
-              button( name = "add folder" data-directory = directory )
+              button( name = "add folder" )
                 include /src/media/images/add-folder.svg
                 span New Folder&hellip;
             li
-              button(
-                name = "add file"
-                data-path = directory
-                data-extension = extension
-              )
+              button( name = "add file" )
                 include /src/media/images/add-file.svg
                 span New File&hellip;
             if selected
               li
-                button( name = "rename" )
+                button( name = "rename" data-path = selected )
                   include /src/media/images/rename.svg
                   span Rename&hellip;
               li
-                button( name = "remove" )
+                button( name = "remove" data-path = selected )
                   include /src/media/images/remove.svg
                   span Delete&hellip;
             else
               li
-                button( name = "rename" disabled )
+                button( name = "rename" data-path = selected disabled )
                   include /src/media/images/rename.svg
                   span Rename&hellip;
               li
-                button( name = "remove" disabled )
+                button( name = "remove" data-path = selected disabled )
                   include /src/media/images/remove.svg
-                  span Delete&hellip;
+                  span Remove&hellip;
 
 
   .editor( slot = "editor" )
     if Object.keys(tabs).length > 0
       vellum-tabs
-        for tab, name in tabs
-          if (tab.path === selectedFile)
+        for _tab, name in tabs
+          if (_tab.path === tab)
             div(
-              slot = `tab-${tab.path}`
-              data-key = tab.path
+              slot = `tab-${_tab.path}`
+              data-key = _tab.path
               selected
             )
-              span= tab.name
-              button( name = `close-${tab.path}` data-path = tab.path )
+              span= _tab.name
+              button( name = `close-${_tab.path}` data-path = _tab.path )
                 include /src/media/images/close.svg
           else
             div(
-              slot = `tab-${tab.path}`
-              data-key = tab.path
+              slot = `tab-${_tab.path}`
+              data-key = _tab.path
             )
-              span= tab.name
-              button( name = `close-${tab.path}` data-path = tab.path )
+              span= _tab.name
+              button( name = `close-${_tab.path}` data-path = _tab.path )
                 include /src/media/images/close.svg
 
-          div(slot = `panel-${tab.path}` data-key = tab.path)
-            studio-code-editor( data-language = tab.language )= tab.content
+          div(slot = `panel-${_tab.path}` data-key = _tab.path)
+            studio-code-editor( data-language = _tab.language )= _tab.content

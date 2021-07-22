@@ -1,20 +1,19 @@
 form
   header
 
-    h1 Add File
+    h1 Rename
 
   section
     .field
       label
         span Path
-        input( type = "text" required = "true" )
+        input( type = "text" required = "true" value = path)
 
       .hint
         :markdown
-          Enter the path for the file you want to add,
-          ex: */css/index.styl*.
+          Enter the new path.
 
   footer
     nav
       a(href = "#") Cancel
-      button Create
+      button Rename

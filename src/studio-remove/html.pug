@@ -1,20 +1,19 @@
 form
   header
 
-    h1 Add File
+    h1 Remove File
 
   section
     .field
       label
-        span Path
-        input( type = "text" required = "true" )
+        span Remove this file?
+        input( type = "text" value = path disabled )
 
       .hint
         :markdown
-          Enter the path for the file you want to add,
-          ex: */css/index.styl*.
+          Select _Remove_ to remove this file, _Cancel_ to keep it.
 
   footer
     nav
       a(href = "#") Cancel
-      button Create
+      button Remove

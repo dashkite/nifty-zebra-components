@@ -1,7 +1,6 @@
 import * as F from "@dashkite/joy/function"
 import * as A from "@dashkite/joy/array"
 import * as M from "@dashkite/joy/metaclass"
-import * as O from "@dashkite/joy/object"
 import * as T from "@dashkite/joy/type"
 import * as Te from "@dashkite/joy/text"
 import * as It from "@dashkite/joy/iterable"
@@ -19,27 +18,12 @@ import {
   Project
 } from "#resources/project"
 
-Path =
-  directory: (path) -> It.join "/", (Te.split "/", path)[..-2]
-  basename: (path) -> A.last Te.split "/", path
-  extension: (path) -> (Te.split ".", (Path.basename path))[1]
+import {
+  initialize
+  removeTab
+  Path
+} from "./helpers"
 
-initialize = K.peek (handle) -> handle.data = tabs: {}
-
-decorate = (data) ->
-  if data.selectedFile?
-    {
-      data...
-      directory: Path.directory data.selected
-      extension: Path.extension data.selected
-    }
-  else if data.selected?
-    {
-      data...
-      directory: data.selected
-    }
-  else
-    data
 
 class extends C.Handle
 
@@ -51,7 +35,6 @@ class extends C.Handle
       C.shadow
       C.sheets main: css
       C.observe "data", [
-        K.poke decorate
         C.render html
         K.read "handle"
       ]
@@ -60,24 +43,23 @@ class extends C.Handle
         C.assign "data"
       ]
       C.event "click", [
-        C.within ".folder, .file", [
+        C.within ".folder", [
+          Ks.push (el, event, handle) -> Path.parseDirectory el.dataset.path
+          C.assign "data"
+        ]
+      ]
+      C.event "click", [
+        C.within ".file", [
           Ks.peek (el, event, handle) ->
-            if (entry = handle.data.files[el.dataset.path])?
-              handle.data.tabs[ el.dataset.path ] = entry
-          Ks.push (el, event, handle) ->
-            selected: el.dataset.path if handle.data.selected != el.dataset.path
-            selectedFile: if handle.data.files[ el.dataset.path ]?
-              el.dataset.path
-            else
-              handle.data.selectedFile
+            handle.data.tabs[ el.dataset.path ] =
+              handle.data.files[ el.dataset.path ]
+          Ks.push (el, event, handle) -> Path.parseFile el.dataset.path
           C.assign "data"
         ]
       ]
       C.event "select", [
         C.matches "vellum-tabs", [
-          Ks.push (event, handle) ->
-            selected: event.detail
-            selectedFile: event.detail
+          Ks.push (event, handle) -> Path.parseFile event.detail
           C.assign "data"
         ]
       ]
@@ -91,13 +73,7 @@ class extends C.Handle
         C.within "button[name^='close-']", [
           C.intercept
           Ks.peek (el, event, handle) ->
-            if handle.data.selectedFile == el.dataset.path
-              paths = O.keys handle.data.tabs
-              for path, i in paths
-                if path == el.dataset.path
-                  handle.data.selectedFile = paths[ Math.abs i - 1 ]
-                  break
-            delete handle.data.tabs[el.dataset.path]
+            removeTab handle, el.dataset.path
         ]
       ]
       C.click ".actions button", [
@@ -106,9 +82,8 @@ class extends C.Handle
           router.browse
             name: el.name
             parameters: {
+              (handle.data)...
               el.dataset...
-              name: handle.data.name
-              (decorate handle.data)...
             }
       ]
     ]

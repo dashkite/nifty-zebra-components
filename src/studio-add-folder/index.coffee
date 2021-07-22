@@ -6,15 +6,13 @@ import * as C from "@dashkite/carbon"
 import html from "./html"
 import css from "./css"
 
-focus = (selector) ->
-  F.flow [
-    K.read "handle"
-    K.peek (handle) -> (handle.root.querySelector selector)?.focus()
-  ]
-
 import {
   Project
 } from "#resources/project"
+
+import {
+  defaultPath
+} from "../studio-add-file/helpers"
 
 class extends C.Handle
 
@@ -24,10 +22,10 @@ class extends C.Handle
     C.initialize [
       C.shadow
       C.sheets main: css
-      C.activate [
-        C.description
+      C.describe [
+        K.poke defaultPath
         C.render html
-        focus "input"
+        C.focus "input"
       ]
     ]
   ]

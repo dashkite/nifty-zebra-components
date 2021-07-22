@@ -24,7 +24,7 @@ class extends C.Handle
     C.initialize [
       C.shadow
       C.sheets main: css
-      C.activate [
+      C.describe [
         C.render html
         focus "input"
       ]
