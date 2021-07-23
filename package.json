@@ -14,7 +14,8 @@
   "license": "SEE LICENSE IN LICENSE.md",
   "author": "",
   "imports": {
-    "#resources/*": "./build/browser/src/resources/*.js"
+    "#resources/*": "./build/browser/src/resources/*.js",
+    "#fixtures/*": "./build/browser/src/fixtures/*.js"
   },
   "exports": {
     ".": {
@@ -32,7 +33,7 @@
     "@dashkite/amen-console": "^0.0.1",
     "@dashkite/assert": "^0.1.3",
     "@dashkite/genie": "^0.5.4",
-    "@dashkite/genie-presets": "^0.4.9",
+    "@dashkite/genie-presets": "file:../genie-presets",
     "@dashkite/joy": "^0.3.10",
     "@dashkite/katana": "^0.4.8",
     "@dashkite/mimic": "^0.2.3",

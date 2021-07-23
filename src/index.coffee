@@ -1,4 +1,5 @@
 import "./studio-projects"
+import "./studio-project-summary"
 import "./studio-ae"
 import "./studio-code-editor"
 import "./studio-add-file"

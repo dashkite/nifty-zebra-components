@@ -81,7 +81,6 @@ class extends C.Handle
       C.click ".actions button", [
         Ks.peek (el, event, handle) ->
           router = await Registry.get "router"
-          console.log handle.data
           router.browse
             name: el.name
             parameters: {

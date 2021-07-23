@@ -1,20 +1,13 @@
-form
-  header
+.main
 
-    h1 Add File
+  header
+    h1 Projects
 
   section
-    .field
-      label
-        span Path
-        input( type = "text" required = "true" )
-
-      .hint
-        :markdown
-          Enter the path for the file you want to add,
-          ex: */css/index.styl*.
-
-  footer
-    nav
-      a(href = "#") Cancel
-      button Create
+    ul
+      for project of projects
+        li
+          studio-project-summary(
+            data-creator = project.parameters.creator
+            data-project = project.parameters.project
+          )

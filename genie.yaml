@@ -52,5 +52,10 @@ presets:
             - src/**/*.styl
             - '!src/index.styl'
   sprites:
-    glob: "src/media/-sprites/**/*.svg"
-    target: "src/media/images/sprites.svg"
+    glob: src/media/-sprites/**/*.svg
+    target: src/media/images/sprites.svg
+  yaml:
+    targets:
+      browser:
+        - preset: js
+          glob: src/**/*.yaml
