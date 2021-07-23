@@ -1,5 +1,6 @@
 import * as F from "@dashkite/joy/function"
 import * as A from "@dashkite/joy/array"
+import * as O from "@dashkite/joy/object"
 import * as M from "@dashkite/joy/metaclass"
 import * as T from "@dashkite/joy/type"
 import * as Te from "@dashkite/joy/text"
@@ -38,8 +39,9 @@ class extends C.Handle
         C.render html
         K.read "handle"
       ]
-      C.activate [
+      C.describe [
         K.push Project.get
+        K.poke F.binary O.merge
         C.assign "data"
       ]
       C.event "click", [
@@ -79,6 +81,7 @@ class extends C.Handle
       C.click ".actions button", [
         Ks.peek (el, event, handle) ->
           router = await Registry.get "router"
+          console.log handle.data
           router.browse
             name: el.name
             parameters: {
