@@ -1,0 +1,4 @@
+fields:
+  - title: Nickname
+    element: span
+    value: nickname

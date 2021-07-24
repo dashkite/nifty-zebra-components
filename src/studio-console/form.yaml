@@ -1,0 +1,12 @@
+title: ~
+fields:
+  - title: Profile
+    label: h2
+    element: studio-profile
+    data:
+      creator: nickname
+  - title: Projects
+    label: h2
+    element: studio-projects
+    data:
+      creator: nickname

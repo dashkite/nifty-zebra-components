@@ -1,3 +1,5 @@
+import "./studio-console"
+import "./studio-profile"
 import "./studio-projects"
 import "./studio-project-summary"
 import "./studio-ae"
