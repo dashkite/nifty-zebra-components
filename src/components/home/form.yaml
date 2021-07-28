@@ -1,11 +1,13 @@
 fields:
-  - title: Profile
-    label: h2
+  - label:
+      text: Profile
+      element: h2
     element: studio-profile
     data:
       creator: nickname
-  - title: Projects
-    label: h2
+  - label:
+      text: Projects
+      element: h2
     element: studio-projects
     data:
       creator: nickname

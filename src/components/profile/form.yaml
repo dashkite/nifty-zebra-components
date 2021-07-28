@@ -1,4 +1,14 @@
-fields:
-  - title: Nickname
-    element: span
-    value: nickname
+groups:
+  - fields:
+      - label:
+          text: URL Name
+        value: nickname
+      - label:
+          text: Display Name
+        value: name
+      - element: link
+        text: Edit
+        reference:
+          name: profile editor
+          parameters:
+            creator: creator

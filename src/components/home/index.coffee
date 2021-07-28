@@ -18,16 +18,17 @@ form = JSON.parse json
 class extends C.Handle
 
   Meta.mixin @, [
-    C.tag "studio-console"
+    C.tag "studio-home"
     C.diff
     C.initialize [
       C.shadow
       C.sheets main: css
       C.describe [
-        K.poke Creator.get
-        C.description
+        K.push Creator.get
         K.poke Fn.binary Obj.merge
-        C.render (data) -> html {form, data}
+        K.poke (data) -> { form, data }
+        K.poke html
+        C.render Fn.identity
       ]
     ]
   ]

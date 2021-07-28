@@ -2,6 +2,7 @@ import { generic } from "@dashkite/joy/generic"
 import * as It from "@dashkite/joy/iterable"
 import * as T from "@dashkite/joy/type"
 import * as Val from "@dashkite/joy/value"
+import Registry from "@dashkite/helium"
 
 isAny = (x) -> true
 
@@ -38,34 +39,54 @@ generic tag, T.isString, T.isUndefined, isAny, (name, ignore, value) -> tag name
 generic tag, T.isString, isAny, Val.isEmpty, (name, value) -> tag name, value
 generic tag, T.isString, isAny, T.isUndefined, (name, value) -> tag name, value
 
+router = undefined
+
 project = (data, properties) ->
   r = {}
   if properties?
     for key, value of properties
-      r["data-#{key}"] = data[value]
+      r[key] = data[value]
+  r
+
+prefix = (prefix, properties) ->
+  r = {}
+  if properties?
+    for key, value of properties
+      r["#{prefix}-#{key}"] = value
   r
 
 fields = ({ form, data }) ->
-  for group in form.groups
-    tag "section", do ->
-      for field in group.fields
-        tag "section", do ->
-          switch field.element
-            when "text input"
-              tag (field.label.element ? "label"), [
-                tag "div", class: "label", field.label.text
-                if field.disabled
-                  tag "input", type: "text", disabled: true, value: data[field.value]
-                else
-                  tag "input", type: "text", value: data[field.value]
-                if field.hint?
-                  tag "div", class: "hint", field.hint
-              ]
-            else
-              [
-                tag (field.label.element ? "label"), field.label.text
-                tag field.element, (project data, field.data), data[field.value]
-              ]
+  router ?= await Registry.get "router"
+  if form.groups?
+    for group in form.groups
+      tag "section", await fields { form: group, data }
+  else
+    for field in form.fields
+      tag "section", do ->
+        switch field.element
+          when "text input"
+            tag (field.label.element ? "label"), [
+              tag "div", class: "label", field.label.text
+              if field.disabled
+                tag "input", type: "text", disabled: true, value: data[field.value]
+              else
+                tag "input", type: "text", value: data[field.value]
+              if field.hint?
+                tag "div", class: "hint", field.hint
+            ]
+          when "link"
+            [
+              tag "a",
+                href: (router.link 
+                  name: field.reference.name, 
+                  parameters: project data, field.reference.parameters)
+                field.text 
+            ]
+          else
+            [
+              tag (field.label.element ? "label"), field.label.text
+              tag (field.element ? "div"), (prefix "data", (project data, field.data)), data[field.value]
+            ]
 
 actions = ({ form, data }) ->
   tag "footer",
@@ -78,7 +99,7 @@ actions = ({ form, data }) ->
 
 html = ({form, data}) ->
   tag (form.element ? "article"), [
-    (fields { form, data })...
+    (await fields { form, data })...
     if form.actions?
       actions { form, data }  
   ]

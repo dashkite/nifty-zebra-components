@@ -5,14 +5,14 @@ groups:
           text: URL Name
         element: text input
         disabled: true
-        value: name
+        value: nickname
         hint: >-
           A short name that may include letters, numbers, and hyphens. 
           Used in URLs, so it can't easily be changed later.
       - label:
-          text: Title
+          text: Display Name
         element: text input
-        value: nickname
+        value: name
         hint: >-
           A longer name that may include spaces and punctuation. Used for display purposes.
 actions:
