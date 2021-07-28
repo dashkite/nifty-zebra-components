@@ -3,17 +3,13 @@ import * as Obj from "@dashkite/joy/object"
 import * as K from "@dashkite/katana"
 import * as Meta from "@dashkite/joy/metaclass"
 import * as C from "@dashkite/carbon"
-import Registry from "@dashkite/helium"
 
-import html from "../html"
+import html from "./html"
 import css from "./css"
 
 import {
   Creator
 } from "#resources/creator"
-
-import json from "./form"
-form = JSON.parse json
 
 class extends C.Handle
 
@@ -26,9 +22,7 @@ class extends C.Handle
       C.describe [
         K.push Creator.get
         K.poke Fn.binary Obj.merge
-        K.poke (data) -> { form, data }
-        K.poke html
-        C.render Fn.identity
+        C.render html
       ]
     ]
   ]
