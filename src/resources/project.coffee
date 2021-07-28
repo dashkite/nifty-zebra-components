@@ -30,24 +30,14 @@ normalize = (drive) ->
     set r.drive, keys, name, entry
   r
 
-_drive =
-  "/css/index.styl": """
-    body
-      margin 3px
-    """
-  "/src/index.coffee": """
-    add = (x, y) -> x + y
-    console.log add 3, 5
-    """
-  "/html/index.pug": "//- this is pug code"
+import json from "../fixtures/project"
+project = JSON.parse json
 
 Project =
   get: ->
     {
-      name: "hello"
-      title: "Hello, World"
-      sizes: [ 20, 80 ]
-      (normalize _drive)...
+      project...
+      (normalize project.files)...
     }
 
 export { Project }

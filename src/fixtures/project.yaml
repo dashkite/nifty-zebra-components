@@ -1,0 +1,14 @@
+name: hello
+title: Hello, World
+sizes: [ 20, 80 ]
+files:
+  /css/index.styl: |-
+    body
+      margin 3px
+
+  /src/index.coffee: |-
+    add = (x, y) -> x + y
+    console.log add 3, 5
+
+  /html/index.pug: |-
+    //- this is pug code

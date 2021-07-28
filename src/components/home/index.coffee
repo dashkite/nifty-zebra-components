@@ -1,9 +1,11 @@
-# import * as F from "@dashkite/joy/function"
+import * as Fn from "@dashkite/joy/function"
+import * as Obj from "@dashkite/joy/object"
 import * as K from "@dashkite/katana"
-import * as M from "@dashkite/joy/metaclass"
+import * as Meta from "@dashkite/joy/metaclass"
 import * as C from "@dashkite/carbon"
+import Registry from "@dashkite/helium"
 
-import html from "../studio-console/html"
+import html from "../html"
 import css from "./css"
 
 import {
@@ -15,14 +17,16 @@ form = JSON.parse json
 
 class extends C.Handle
 
-  M.mixin @, [
-    C.tag "studio-profile"
+  Meta.mixin @, [
+    C.tag "studio-console"
     C.diff
     C.initialize [
       C.shadow
       C.sheets main: css
       C.describe [
         K.poke Creator.get
+        C.description
+        K.poke Fn.binary Obj.merge
         C.render (data) -> html {form, data}
       ]
     ]

@@ -1,7 +1,5 @@
 nickname: dan
-name:
-  first: Dan
-  last: Yoder
+name: Dan Yoder
 projects:
   - name: project
     parameters:

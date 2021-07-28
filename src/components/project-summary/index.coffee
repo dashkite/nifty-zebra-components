@@ -24,9 +24,13 @@ class extends C.Handle
         C.description
         K.pop (description, data) ->
           router = await Registry.get "router"
-          data.link = router.link
-            name: "project"
-            parameters: description
+          data.links = 
+            workspace: router.link
+              name: "workspace"
+              parameters: description
+            editor: router.link
+              name: "project editor"
+              parameters: description
         C.render html
       ]
     ]

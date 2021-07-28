@@ -1,0 +1,23 @@
+element: form
+groups:
+  - fields:
+      - label:
+          text: URL Name
+        element: text input
+        disabled: true
+        value: name
+        hint: >-
+          A short name that may include letters, numbers, and hyphens. 
+          Used in URLs, so it can't easily be changed later.
+      - label:
+          text: Title
+        element: text input
+        value: nickname
+        hint: >-
+          A longer name that may include spaces and punctuation. Used for display purposes.
+actions:
+  - label: Cancel
+    name: cancel  
+  - label: Save
+    name: save
+    default: true

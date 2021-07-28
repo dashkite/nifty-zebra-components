@@ -1,0 +1,7 @@
+ul
+  for project of projects
+    li
+      studio-project-summary(
+        data-creator = project.parameters.creator
+        data-project = project.parameters.project
+      )

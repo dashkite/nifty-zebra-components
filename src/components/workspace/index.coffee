@@ -29,7 +29,7 @@ import {
 class extends C.Handle
 
   M.mixin @, [
-    C.tag "studio-ae"
+    C.tag "studio-workspace"
     C.diff
     C.initialize [
       initialize

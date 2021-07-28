@@ -1,0 +1,71 @@
+:host
+  display block
+
+form
+  display flex
+  flex-flow column
+  row-gap 2rem
+  max-width 48rem
+
+  & > section
+    display flex
+    row-gap 2rem
+    column-gap 2rem
+
+    section
+      min-width 18rem
+      flex 1
+
+    label
+      display flex
+      flex-direction column
+      row-gap 0.5rem
+
+      & > div.label
+        font-weight bold
+        margin-right 1rem
+
+      div.hint::before
+        content "Hint:"
+        font-weight bold
+        margin-right 0.25rem
+
+    input
+      border 1px solid var(--input-border-color, silver)
+      border-radius var(--input-border-radius, 0.25rem)
+      padding 0.75rem
+      font-size var(--text-input-font-size, 1.15rem)
+      line-height var(--text-input-line-height, 1.25rem)
+      color var(--text-input-color, #444)
+
+      &:disabled
+        color gray
+        background light-gray
+        opacity 3/4
+        cursor not-allowed
+      
+      &:focus
+        outline none
+        box-shadow 0 0 0 1px currentColor
+
+
+  & > footer
+    nav
+      display flex
+      column-gap 1rem
+      justify-content flex-end
+
+      button
+        min-width 12ch
+        border 1px solid var(--button-border-color, silver)
+        border-radius var(--button-border-radius, 0.25rem)
+        padding 0.75rem
+        font-size var(--button-text-font-size, 1rem)
+        line-height var(--button-text-line-height, 1)
+        color var(--button-text-color, #444)
+        background var(--button-background, transparent)
+
+        &.default
+          font-weight bold
+          border-width 2px
+
