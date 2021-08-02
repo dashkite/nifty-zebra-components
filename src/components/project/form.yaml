@@ -1,7 +1,0 @@
-fields:
-  - title: URL Name
-    element: span
-    value: name
-  - title: Title
-    element: span
-    value: title

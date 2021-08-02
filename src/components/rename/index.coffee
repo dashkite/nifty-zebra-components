@@ -6,12 +6,6 @@ import * as C from "@dashkite/carbon"
 import html from "./html"
 import css from "./css"
 
-focus = (selector) ->
-  F.flow [
-    K.read "handle"
-    K.peek (handle) -> (handle.root.querySelector selector)?.focus()
-  ]
-
 import {
   Project
 } from "#resources/project"
@@ -26,7 +20,7 @@ class extends C.Handle
       C.sheets main: css
       C.describe [
         C.render html
-        focus "input"
+        C.focus "input"
       ]
     ]
   ]

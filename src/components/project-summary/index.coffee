@@ -1,4 +1,5 @@
-# import * as F from "@dashkite/joy/function"
+import * as Fn from "@dashkite/joy/function"
+import * as Obj from "@dashkite/joy/object"
 import * as K from "@dashkite/katana"
 import * as M from "@dashkite/joy/metaclass"
 import * as C from "@dashkite/carbon"
@@ -20,17 +21,8 @@ class extends C.Handle
       C.shadow
       C.sheets main: css
       C.describe [
-        K.poke Project.get
-        C.description
-        K.pop (description, data) ->
-          router = await Registry.get "router"
-          data.links = 
-            workspace: router.link
-              name: "workspace"
-              parameters: description
-            editor: router.link
-              name: "project editor"
-              parameters: description
+        K.push Project.get
+        K.poke Fn.binary Obj.merge
         C.render html
       ]
     ]

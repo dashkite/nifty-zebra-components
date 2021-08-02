@@ -1,0 +1,22 @@
+form
+  section
+    section
+      label
+        .label URL Name 
+        input( type = "text" disabled = true value = name )
+        .hint.
+          A short name that may include letters, numbers, and hyphens. 
+          Used in URLs, so it can't easily be changed later.
+    section 
+      label
+        .label Title
+        input( type = "text" value = title )
+        .hint.
+          A longer name that may include spaces and punctuation. Used for display purposes.
+    section
+      studio-link( name = "workspace" data-creator = creator data-project = name ) Workspace
+
+  footer 
+    nav
+      button( name = "cancel" ) Cancel
+      button( name = "save" data-default = "true" ) Save
