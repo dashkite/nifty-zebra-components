@@ -1,3 +1,4 @@
+import "./components/register"
 import "./components/home"
 import "./components/profile"
 import "./components/profile-editor"

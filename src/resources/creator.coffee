@@ -1,5 +1,4 @@
-import json from "../fixtures/creator"
-creator = JSON.parse json
+import creator from "../fixtures/creator"
 
 Creator =
   get: -> creator

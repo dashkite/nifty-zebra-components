@@ -30,8 +30,7 @@ normalize = (drive) ->
     set r.drive, keys, name, entry
   r
 
-import json from "../fixtures/project"
-project = JSON.parse json
+import project from "../fixtures/project"
 
 Project =
   get: ->

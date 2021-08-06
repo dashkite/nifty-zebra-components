@@ -1,0 +1,20 @@
+form
+  section 
+    section 
+      label
+        .label URL Name 
+        input( type = "text" )
+        .hint.
+          A short name that may include letters, numbers, and hyphens. 
+          Used in URLs, so it can't easily be changed later.
+    section 
+      label
+        .label Display Name 
+        input( type = "text" )
+        .hint.
+          A longer name that may include spaces and punctuation. Used for display purposes.
+
+  footer 
+    nav 
+      button( name = "cancel" ) Cancel 
+      button( name = "save" data-default = "true" ) Create Profile

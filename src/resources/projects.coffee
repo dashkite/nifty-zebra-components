@@ -1,5 +1,4 @@
-import json from "../fixtures/projects"
-projects = JSON.parse json
+import projects from "../fixtures/projects"
 
 Projects =
   get: -> { projects }
