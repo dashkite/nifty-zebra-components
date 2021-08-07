@@ -1,0 +1,17 @@
+article
+  header
+    h2 Current Status
+    p
+      span( class = `status ${status}`) status
+
+  section
+    h2 Previously Published Versions
+    ul
+    for item of history 
+      li
+        span.when= item.when
+        span( class = `result ${item.result}`)= item.result
+
+  footer
+    nav
+      studio-link( name = "home" data-creator = creator )= Home
