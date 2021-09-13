@@ -19,6 +19,10 @@ presets:
   release: null
   esm: null
   browser:
+    esm:
+      directories: 
+        - .
+        - ./build/browser/src
     logging: false
     fallback: ./build/browser/test/client/index.html
   pug:
@@ -32,14 +36,15 @@ presets:
               '@dashkite/amen': latest
               '@dashkite/assert': latest
       app:
-        - preset: render
-          glob: src/index.pug
-          document: true
         - preset: compile
           glob:
             - src/**/*.pug
             - '!src/index.pug'
   server:
+    esm:
+      directories:
+        - .
+        - ./build/browser/src
     logging: false
     fallback: ./build/browser/src/index.html
   stylus:
